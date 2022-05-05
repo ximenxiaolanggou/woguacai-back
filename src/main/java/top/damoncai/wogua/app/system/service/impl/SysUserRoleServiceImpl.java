@@ -1,0 +1,69 @@
+package top.damoncai.wogua.app.system.service.impl;
+
+import cn.hutool.core.util.ArrayUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import top.damoncai.wogua.app.system.entity.SysRole;
+import top.damoncai.wogua.app.system.entity.SysUser;
+import top.damoncai.wogua.app.system.entity.SysUserRole;
+import top.damoncai.wogua.app.system.mapper.SysUserRoleMapper;
+import top.damoncai.wogua.app.system.service.SysUserRoleService;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author zhishun.cai
+ * @since 2021-12-02
+ */
+@Service
+@Transactional
+public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
+
+    @Autowired
+    private SysUserRoleMapper userRoleMapper;
+
+    /**
+     * 更新用户角色关系
+     * @param userId
+     * @param roleIdsStr
+     */
+    @Override
+    public void update(Integer userId, String[] roleIdsStr) {
+        removeByUserId(userId);
+        add(userId,roleIdsStr);
+    }
+
+    /**
+     * 根据用户ID删除
+     * @param userId
+     */
+    @Override
+    public void removeByUserId(Integer userId) {
+        userRoleMapper.delete(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId,userId));
+    }
+
+    /**
+     * 添加
+     * @param userId
+     * @param roleIdsStr
+     */
+    @Override
+    public void add(Integer userId, String[] roleIdsStr) {
+        if(!ArrayUtil.isNotEmpty(roleIdsStr)) return;
+        SysUserRole userRole = new SysUserRole();
+        userRole.setUserId(userId);
+        for (String roleIdStr : roleIdsStr) {
+            int roleId = Integer.parseInt(roleIdStr);
+            userRole.setRoleId(roleId);
+            userRoleMapper.insert(userRole);
+        }
+    }
+
+}
