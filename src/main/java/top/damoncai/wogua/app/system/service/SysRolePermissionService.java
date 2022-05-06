@@ -15,4 +15,9 @@ import java.util.List;
  */
 public interface SysRolePermissionService extends IService<SysRolePermission> {
 
+    /**
+     * 根据角色ID删除
+     * @param roleId
+     */
+    void removeByRoleId(Integer roleId);
 }

@@ -35,4 +35,10 @@ public interface SysUserRoleService extends IService<SysUserRole> {
      * @param roleIdsStr
      */
     void update(Integer userId, String[] roleIdsStr);
+
+    /**
+     * 根据角色ID删除
+     * @param roleId
+     */
+    void removeByRoleId(Integer roleId);
 }

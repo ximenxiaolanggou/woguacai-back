@@ -41,6 +41,15 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     }
 
     /**
+     * 根据角色ID删除
+     * @param roleId
+     */
+    @Override
+    public void removeByRoleId(Integer roleId) {
+        userRoleMapper.delete(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getRoleId,roleId));
+    }
+
+    /**
      * 根据用户ID删除
      * @param userId
      */

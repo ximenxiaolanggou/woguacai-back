@@ -21,4 +21,18 @@ public interface SysRoleService extends IService<SysRole> {
      * @return
      */
     List<SysRole> list(String searchKey);
+
+    /**
+     * 根据名称查询
+     * @param name
+     * @return
+     */
+    SysRole findByName(String name);
+
+    /**
+     * 根据名称查询并不包含此角色
+     * @param name
+     * @return
+     */
+    SysRole findByNameIgnoreRoleId(String name, Integer roleId);
 }

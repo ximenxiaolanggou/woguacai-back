@@ -29,6 +29,26 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private SysRoleMapper roleMapper;
 
     /**
+     * 根据名称查询
+     * @param name
+     * @return
+     */
+    @Override
+    public SysRole findByName(String name) {
+        return roleMapper.selectOne(new LambdaQueryWrapper<SysRole>().eq(SysRole::getName,name));
+    }
+
+    /**
+     * 根据名称查询并不包含此角色
+     * @param name
+     * @return
+     */
+    @Override
+    public SysRole findByNameIgnoreRoleId(String name, Integer roleId) {
+        return roleMapper.selectOne(new LambdaQueryWrapper<SysRole>().eq(SysRole::getName,name).notIn(SysRole::getId,roleId));
+    }
+
+    /**
      * 列表
      * @param searchKey
      * @return

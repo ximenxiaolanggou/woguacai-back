@@ -26,6 +26,8 @@ public enum ResCode {
     ERROR_EMIAL_CODE_EXPIRE(false,21,"验证码已过期"),
     ERROR_EMIAL_CODE_NOT_MATCH(false,22,"验证码不匹配"),
     ERROR_EMIAL_EXIST(false,23,"邮箱号已存在"),
+    // 角色
+    ERROR_ROLE_EXIST(false,30,"角色名称已存在"),
     // -- 手机 --
     ERROR_MOBILE_EXIST(false,50,"手机号已存在"),
     ;
