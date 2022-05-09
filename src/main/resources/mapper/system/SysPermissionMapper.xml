@@ -13,4 +13,19 @@
         LEFT JOIN sys_user_role user_role ON user_role.role_id = role.id
         WHERE user_role.user_id = #{userId}
     </select>
+
+    <!-- 排序列表 -->
+    <select id="orderList" resultType="top.damoncai.wogua.app.system.entity.SysPermission">
+        select * from  sys_permission order by pid ASC, zindex ASC
+    </select>
+
+    <!-- 根据角色ID查询权限信息 -->
+    <select id="findByRole" resultType="top.damoncai.wogua.app.system.entity.SysPermission">
+        SELECT
+            permission.*
+        FROM
+        sys_permission permission
+        LEFT JOIN sys_role_permission role_permission ON permission.id = role_permission.permission_id
+        WHERE role_permission.role_id = #{roleId}
+    </select>
 </mapper>

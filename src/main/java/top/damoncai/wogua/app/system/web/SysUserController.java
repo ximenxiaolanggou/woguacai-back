@@ -90,7 +90,7 @@ public class SysUserController {
         // 更新角色
         if(StringUtils.isNotBlank(sysUser.getRoleIds())) {
             String[] roleIdsStr = sysUser.getRoleIds().split(",");
-            userRoleService.update(sysUser.getId(),roleIdsStr);
+            userRoleService.update(id,roleIdsStr);
         }
         return Result.ok();
     }

@@ -1,6 +1,7 @@
 package top.damoncai.wogua.app.system.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import top.damoncai.wogua.app.system.entity.SysRole;
 import top.damoncai.wogua.app.system.entity.SysRolePermission;
@@ -82,6 +83,21 @@ public class SysRoleController {
         userRoleService.removeByRoleId(id);
         // 删除权限角色
         rolePermissionService.removeByRoleId(id);
+        return Result.ok();
+    }
+
+    /**
+     * 分配权限
+     * @param roldId
+     * @param permissionIds
+     * @return
+     */
+    @PutMapping("assignPermission/{roldId}")
+    @Transactional
+    public Result assignPermission(@PathVariable("roldId") Integer roldId, @RequestBody List<Integer> permissionIds) {
+        //根据角色ID删除
+        rolePermissionService.removeByRoleId(roldId);
+        rolePermissionService.add(roldId, permissionIds);
         return Result.ok();
     }
 }

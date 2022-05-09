@@ -28,6 +28,8 @@ public enum ResCode {
     ERROR_EMIAL_EXIST(false,23,"邮箱号已存在"),
     // 角色
     ERROR_ROLE_EXIST(false,30,"角色名称已存在"),
+    // 权限
+    ERROR_PERMISSION_EXIST(false,40,"权限已存在"),
     // -- 手机 --
     ERROR_MOBILE_EXIST(false,50,"手机号已存在"),
     ;
