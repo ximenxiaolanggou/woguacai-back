@@ -28,7 +28,7 @@ public class BlogUpload extends Model<BlogUpload> {
     /**
      * 主键
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private String uuid;
 
     /**

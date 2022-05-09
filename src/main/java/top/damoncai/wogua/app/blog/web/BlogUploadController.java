@@ -1,22 +1,18 @@
-package top.damoncai.wogua.app.blog;
+package top.damoncai.wogua.app.blog.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import top.damoncai.wogua.app.blog.entity.BlogUpload;
 import top.damoncai.wogua.app.blog.properties.BlogProperties;
+import top.damoncai.wogua.app.blog.service.BlogArticleService;
 import top.damoncai.wogua.app.blog.service.BlogUploadService;
 import top.damoncai.wogua.common.base.Result;
-import top.damoncai.wogua.common.util.FileUtils;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -28,8 +24,8 @@ import java.util.UUID;
  * @since 2022/5/9 15:50
  */
 @RestController
-@RequestMapping("blog")
-public class BlogController {
+@RequestMapping("blogUpload")
+public class BlogUploadController {
 
     @Autowired
     private BlogProperties blogProperties;
