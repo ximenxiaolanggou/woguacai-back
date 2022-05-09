@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /api
 spring:
+  profiles:
+    include: blog
   servlet:
     multipart:
       enabled: true
@@ -28,7 +30,7 @@ spring:
           username: root
           password: zhishun.cai
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/wogua?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+          url: jdbc:mysql://47.100.22.236:3306/wogua?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
