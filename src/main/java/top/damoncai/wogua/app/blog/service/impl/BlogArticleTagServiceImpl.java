@@ -30,6 +30,15 @@ public class BlogArticleTagServiceImpl extends ServiceImpl<BlogArticleTagMapper,
     private BlogArticleTagMapper articleTagMapper;
 
     /**
+     * 根据标签删除
+     * @param tagId
+     */
+    @Override
+    public void deleteByTagId(Integer tagId) {
+        articleTagMapper.delete(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getTagId,tagId));
+    }
+
+    /**
      * 根据文章ID删除
      * @param articleId
      */

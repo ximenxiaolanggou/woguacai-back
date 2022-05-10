@@ -18,6 +18,16 @@ public class BlogArticle {
     private Integer id;
 
     /**
+     * 标题
+     */
+    private String title;
+
+    /**
+     * 副标题
+     */
+    private String subTitle;
+
+    /**
      * 内容
      */
     private String content;
@@ -29,10 +39,34 @@ public class BlogArticle {
     private List<Integer> categories;
 
     /**
+     * 分类ID , 隔开
+     */
+    @TableField(exist = false)
+    private String categoryIds;
+
+    /**
+     * 分类名称
+     */
+    @TableField(exist = false)
+    private String categoryNames;
+
+    /**
      * 标签
      */
     @TableField(exist = false)
     private List<Integer> tags;
+
+    /**
+     * 标签ID , 隔开
+     */
+    @TableField(exist = false)
+    private String tagIds;
+
+    /**
+     * 标签名称
+     */
+    @TableField(exist = false)
+    private String tagNames;
 
     /**
      * 创建时间

@@ -28,4 +28,10 @@ public interface BlogArticleTagService extends IService<BlogArticleTag> {
      * @param articleId
      */
     void deleteByArticleId(Integer articleId);
+
+    /**
+     * 根据标签删除
+     * @param tagId
+     */
+    void deleteByTagId(Integer tagId);
 }
