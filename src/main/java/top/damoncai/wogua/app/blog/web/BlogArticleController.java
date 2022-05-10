@@ -88,7 +88,7 @@ public class BlogArticleController {
      * @param id
      * @return
      */
-    @GetMapping("{id}")
+    @GetMapping("findById/{id}")
     public Result findById(@PathVariable("id") Integer id) {
         BlogArticle article = articleService.findById(id);
         return Result.ok(article);
@@ -99,7 +99,7 @@ public class BlogArticleController {
      * @param id
      * @return
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("del/{id}")
     public Result del(@PathVariable("id") Integer id) {
         articleService.removeById(id);
         articleCategoryService.deleteByArticleId(id);
