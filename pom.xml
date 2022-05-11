@@ -21,7 +21,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <mp.version>3.3.1</mp.version>
+        <mp.version>3.3.2</mp.version>
         <p6spy.version>3.8.5</p6spy.version>
         <hutool.version>5.5.9</hutool.version>
         <knife4j.version>2.0.7</knife4j.version>
