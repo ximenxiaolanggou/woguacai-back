@@ -24,8 +24,8 @@
         <mp.version>3.3.2</mp.version>
         <p6spy.version>3.8.5</p6spy.version>
         <hutool.version>5.5.9</hutool.version>
-        <netty.version>4.1.8.Final</netty.version>
-        <protobuf.version>3.6.1</protobuf.version>
+<!--        <netty.version>4.1.78.Final</netty.version>-->
+<!--        <protobuf.version>3.6.1</protobuf.version>-->
         <knife4j.version>2.0.7</knife4j.version>
         <fastjson.version>1.2.47</fastjson.version>
         <sa-token.version>1.29.0</sa-token.version>
@@ -92,36 +92,10 @@
                 <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${sa-token.version}</version>
             </dependency>
-
-            <!-- netty -->
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-
-            <!-- protobuf -->
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>${protobuf.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-
-        <!-- netty -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-        </dependency>
-
-        <!-- protobuf -->
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-        </dependency>
 
         <!-- Bcrypt算法依赖 -->
         <dependency>
