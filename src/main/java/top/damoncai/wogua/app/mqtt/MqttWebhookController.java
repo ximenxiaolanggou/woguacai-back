@@ -28,10 +28,8 @@ public class MqttWebhookController {
 
     @PostMapping("webhook")
     public void webhook(@RequestBody Map map) {
-        String action = String.valueOf(map.get("client_connected"));
-        log.info("action:{}", action);
-        String clientId = String.valueOf(map.get("cliendid"));
-        log.info("cliendid:{}", clientId);
+        String action = String.valueOf(map.get("action"));
+        String clientId = String.valueOf(map.get("clientid"));
         if("client_connected".equals(action)){
             iotService.updateOnlineBySn(clientId,1);
         }
