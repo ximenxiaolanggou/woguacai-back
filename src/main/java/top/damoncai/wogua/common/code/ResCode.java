@@ -32,6 +32,8 @@ public enum ResCode {
     ERROR_PERMISSION_EXIST(false,40,"权限已存在"),
     // -- 手机 --
     ERROR_MOBILE_EXIST(false,50,"手机号已存在"),
+    // IOT
+    ERROR_SN_EXIST(false,60,"SN已存在"),
     ;
 
     private boolean flag;

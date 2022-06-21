@@ -47,10 +47,10 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         System.out.println(s);
         Channel inChannel = ctx.channel();
         //将消息广播出去
-        for(Channel channel : channels){
-            if(inChannel != channel){
-                channel.writeAndFlush("[" + inChannel.remoteAddress().toString().substring(1) + "]" + "说:" + s.trim() +"\n");
-            }
-        }
+//        for(Channel channel : channels){
+//            if(inChannel != channel){
+//                channel.writeAndFlush("[" + inChannel.remoteAddress().toString().substring(1) + "]" + "说:" + s.trim() +"\n");
+//            }
+//        }
     }
 }

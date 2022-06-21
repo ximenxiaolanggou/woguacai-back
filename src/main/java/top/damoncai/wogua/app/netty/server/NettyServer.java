@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class NettyServer {
 
-    @PostConstruct
+//    @PostConstruct
     public void nettyServerInit() throws Exception {
         //1.创建线程组：接收客户端连接
         EventLoopGroup bossGroup = new NioEventLoopGroup();

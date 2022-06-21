@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import top.damoncai.wogua.app.iot.entity.Iot;
 import top.damoncai.wogua.app.iot.service.IotService;
 import top.damoncai.wogua.common.base.Result;
+import top.damoncai.wogua.common.code.ResCode;
+import top.damoncai.wogua.common.exception.ApiException;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -29,6 +34,9 @@ public class IotController {
      */
     @PostMapping
     public Result add(@RequestBody Iot iot){
+        // 判断SN是否存在
+        Iot iotBySn = iotService.findBySn(iot.getSn());
+        if(null != iotBySn) throw new ApiException(ResCode.ERROR_SN_EXIST);
         iotService.save(iot);
         return Result.ok();
     }
@@ -41,6 +49,9 @@ public class IotController {
      */
     @PutMapping("{id}")
     public Result update(@RequestBody Iot iot, @PathVariable Integer id){
+        // 判断SN是否重复
+        Iot iotBySnIgnoreCur = iotService.findBySnIgnoreCur(iot.getSn(), Arrays.asList(id));
+        if(null != iotBySnIgnoreCur) throw new ApiException(ResCode.ERROR_SN_EXIST);
         iot.setId(id);
         iotService.updateById(iot);
         return Result.ok();
@@ -55,5 +66,16 @@ public class IotController {
     public Result remove(@PathVariable Integer id){
         iotService.removeById(id);
         return Result.ok();
+    }
+
+    /**
+     * 列表
+     * @param searchKey
+     * @return
+     */
+    @GetMapping("list")
+    public Result list(String searchKey){
+        List<Iot> iots = iotService.list(searchKey);
+        return Result.ok(iots);
     }
 }

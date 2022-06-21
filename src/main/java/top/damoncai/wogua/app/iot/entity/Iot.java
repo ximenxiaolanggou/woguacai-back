@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
+import top.damoncai.wogua.common.ivalidation.Insert;
+import top.damoncai.wogua.common.ivalidation.Update;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -28,9 +32,16 @@ public class Iot extends Model<Iot> {
     private Integer id;
 
     /**
-     * 名称
+     * sn
      */
+    @NotBlank(message = "SN不可为空", groups = {Insert.class, Update.class})
     private String sn;
+
+    /**
+     * 协议类型 1 MQTT Borker, 2 TCP, 3 UDP, 4 HTTP
+     */
+    @NotNull(message = "协议类型不可为空", groups = {Insert.class, Update.class})
+    private Integer protocolType;
 
     /**
      * 0 离线 1 在线

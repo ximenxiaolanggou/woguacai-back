@@ -2,6 +2,7 @@ package top.damoncai.wogua.app.iot.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import top.damoncai.wogua.app.iot.entity.Iot;
 import top.damoncai.wogua.app.iot.entity.Temp;
 
@@ -15,4 +16,12 @@ import top.damoncai.wogua.app.iot.entity.Temp;
  */
 @Mapper
 public interface IotMapper extends BaseMapper<Iot> {
+
+    /**
+     * 通过SN 更新状态信息
+     *
+     * @param sn
+     * @param online
+     */
+    void updateOnlineBySn(@Param("sn") String sn, @Param("online") Integer online);
 }

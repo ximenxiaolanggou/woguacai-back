@@ -13,6 +13,10 @@ public class SaTokenInterceptorConfirure implements WebMvcConfigurer {
         // 注册Sa-Token的路由拦截器
         registry.addInterceptor(new SaRouteInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/auth/login","/blogArticle/findById/**","/blogArticle/page/**");
+                .excludePathPatterns(
+                        "/auth/login",
+                        "/blogArticle/findById/**",
+                        "/blogArticle/page/**",
+                        "/mqtt/**");
     }
 }
