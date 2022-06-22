@@ -1,4 +1,4 @@
-package top.damoncai.wogua.app.mqtt;
+package top.damoncai.wogua.app.mqtt.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
