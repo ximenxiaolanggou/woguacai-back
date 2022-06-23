@@ -4,7 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import top.damoncai.wogua.app.iot.entity.Temp;
+import top.damoncai.wogua.app.iot.service.TempService;
+import top.damoncai.wogua.common.code.TopicEnum;
 
 /**
  * <p>
@@ -19,9 +23,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageCallback implements MqttCallback {
 
+    @Autowired
+    private TempService tempService;
+
     @Override
     public void connectionLost(Throwable cause) {
         //丢失对服务端的连接后触发该方法回调，此处可以做一些特殊处理，比如重连
+
         log.info("丢失了对broker的连接");
     }
     /**
@@ -41,7 +49,26 @@ public class MessageCallback implements MqttCallback {
                 message.getId(),
                 message.getQos(),
                 new String(message.getPayload()));
+        switch (topic){
+            case "temp":
+                tempHandle(message);
+        }
     }
+
+    /**
+     * 温度处理
+     * @param message
+     */
+    private void tempHandle(MqttMessage message) {
+        byte[] payload = message.getPayload();
+        float t = ((payload[0] << 8) |  payload[1]) / 16.0f;
+        System.out.println(t);
+        Temp temp = new Temp();
+        temp.setSource("test");
+        temp.setTemp(String.valueOf(t));
+        tempService.save(temp);
+    }
+
     /**
      * 消息发布完成且收到ack确认后的回调
      * QoS0：消息被网络发出后触发一次
@@ -55,4 +82,14 @@ public class MessageCallback implements MqttCallback {
         String[] topics = token.getTopics();
         log.info("消息发送完成,messageId={},topics={}",messageId,topics);
     }
+
+    public static void main(String[] args) {
+        byte b1 = 0x67;
+        byte b2 = 0x01;
+        int a = (0x01 << 8) | 0x67;
+        System.out.println(a);
+        double f = a/16.0;
+        System.out.println(f);
+    }
+
 }

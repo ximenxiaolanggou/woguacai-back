@@ -33,6 +33,9 @@ public class MqttWebhookController {
         if("client_connected".equals(action)){
             iotService.updateOnlineBySn(clientId,1);
         }
+        if("client_disconnected".equals(action)){
+            iotService.updateOnlineBySn(clientId,0);
+        }
         log.info("data: " + map);
     }
 }

@@ -4,7 +4,7 @@ server:
     context-path: /api
 spring:
   profiles:
-    include: blog
+    include: blog, mqtt
   servlet:
     multipart:
       enabled: true
@@ -27,10 +27,10 @@ spring:
       primary: master
       datasource:
         master:
-          username: mpw:3q8TtXnibsuiuirUk+8VbQ==
-          password: mpw:dxXy9nV4sdU+RXLKBC+UeA==
+          username: root
+          password: zhishun.cai
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: mpw:j+Wgh4CW6rmOdcAKmOIPFkzXeF0wMA1/d02HC0rgG8QdEv1KXUJXw0lG45vIhmn9A6LjdXo6tfgjpygbxbjfnJ3YUEa3eb6+xbFln5kwxu9jkqeOowsVkeYhaWiQrAgzNIs7Oppvxb33VMJxGF/gVhbMjqEdWM7irUsCfSL6XQzMGvE/laKwIhqxg5zoJPPvtZ2ZAGIiPGoZAWSDl9KnAt5WLwvfO29JJMlDCJbGSEs=
+          url: jdbc:mysql://47.100.22.236:3306/wogua?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
