@@ -25,9 +25,9 @@ public class EmqClientController {
     /**
      * 订阅主题
      */
-    @PostConstruct
+    //@PostConstruct
     public void postC() {
-        emqClient.subscribe("temp",QosEnum.QoS0);
+        emqClient.subscribe("test",QosEnum.QoS0);
     }
 
     /**
@@ -50,19 +50,7 @@ public class EmqClientController {
      */
     @GetMapping("publish")
     public String publish(@RequestParam String msg) {
-        new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    emqClient.publish("testtopic/123",msg, QosEnum.QoS2,false);
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
+        emqClient.publish("test",msg, QosEnum.QoS0,false);
         return "消息发送成功 ~~";
     }
 
