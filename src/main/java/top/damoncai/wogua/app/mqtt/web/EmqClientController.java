@@ -25,7 +25,7 @@ public class EmqClientController {
     /**
      * 订阅主题
      */
-    //@PostConstruct
+    @PostConstruct
     public void postC() {
         emqClient.subscribe("test",QosEnum.QoS0);
     }

@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.damoncai.wogua.app.iot.entity.Iot;
 import top.damoncai.wogua.app.iot.service.IotService;
+import top.damoncai.wogua.app.mqtt.client.EmqClient;
 import top.damoncai.wogua.common.base.Result;
+import top.damoncai.wogua.common.code.QosEnum;
 import top.damoncai.wogua.common.code.ResCode;
 import top.damoncai.wogua.common.exception.ApiException;
 
@@ -26,6 +28,9 @@ public class IotController {
 
     @Autowired
     private IotService iotService;
+
+    @Autowired
+    private EmqClient emqClient;
 
     /**
      * 添加
@@ -77,5 +82,22 @@ public class IotController {
     public Result list(String searchKey){
         List<Iot> iots = iotService.list(searchKey);
         return Result.ok(iots);
+    }
+
+    /**
+     * 开关LED灯
+     * @param openOrClose
+     * @return
+     */
+    @PutMapping("openOrCloseLed/{id}")
+    public Result openOrCloseLed(boolean openOrClose){
+        if(openOrClose) { // 开灯
+            emqClient.publish("test","23", QosEnum.QoS0,false);
+            emqClient.publish("test","24", QosEnum.QoS0,false);
+        }else{ // 关灯
+            emqClient.publish("test","13", QosEnum.QoS0,false);
+            emqClient.publish("test","14", QosEnum.QoS0,false);
+        }
+        return Result.ok();
     }
 }
