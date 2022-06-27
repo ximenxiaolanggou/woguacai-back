@@ -27,7 +27,7 @@ public class EmqClientController {
      */
     @PostConstruct
     public void postC() {
-        emqClient.subscribe("test",QosEnum.QoS0);
+        emqClient.subscribe("temp",QosEnum.QoS0);
     }
 
     /**
