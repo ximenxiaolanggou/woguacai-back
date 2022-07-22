@@ -43,6 +43,7 @@ public class IotController {
         Iot iotBySn = iotService.findBySn(iot.getSn());
         if(null != iotBySn) throw new ApiException(ResCode.ERROR_SN_EXIST);
         iotService.save(iot);
+        emqClient.subscribe(iot.getSn(),QosEnum.QoS0);
         return Result.ok();
     }
 
@@ -69,7 +70,9 @@ public class IotController {
      */
     @DeleteMapping("{id}")
     public Result remove(@PathVariable Integer id){
+        Iot iot = iotService.getById(id);
         iotService.removeById(id);
+        emqClient.unsubscribe(iot.getSn());
         return Result.ok();
     }
 

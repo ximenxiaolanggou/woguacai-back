@@ -2,10 +2,13 @@ package top.damoncai.wogua.app.mqtt.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import top.damoncai.wogua.app.iot.entity.Iot;
+import top.damoncai.wogua.app.iot.service.IotService;
 import top.damoncai.wogua.app.mqtt.client.EmqClient;
 import top.damoncai.wogua.common.code.QosEnum;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * <p>
@@ -22,12 +25,19 @@ public class EmqClientController {
     @Autowired
     private EmqClient emqClient;
 
+    @Autowired
+    private IotService iotService;
+
     /**
      * 订阅主题
      */
     @PostConstruct
     public void postC() {
-        emqClient.subscribe("test",QosEnum.QoS0);
+        List<Iot> iots = iotService.list();
+        for (Iot iot : iots) {
+            emqClient.subscribe(iot.getSn(),QosEnum.QoS0);
+        }
+
     }
 
     /**

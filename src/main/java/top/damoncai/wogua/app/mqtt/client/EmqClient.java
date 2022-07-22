@@ -111,6 +111,17 @@ public class EmqClient {
             e.printStackTrace();
         }
     }
+
+    public void unsubscribe(String topicFilter){
+        try {
+            mqttClient.unsubscribe(topicFilter);
+        } catch (MqttException e) {
+            e.printStackTrace();
+            log.error("取消订阅失败,topicfilter={},errormsg={}",topicFilter,e.getMessage());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 断开连接
      */

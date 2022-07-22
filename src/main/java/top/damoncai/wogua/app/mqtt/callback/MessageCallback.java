@@ -1,5 +1,9 @@
 package top.damoncai.wogua.app.mqtt.callback;
 
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -8,7 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.damoncai.wogua.app.iot.entity.Temp;
 import top.damoncai.wogua.app.iot.service.TempService;
+import top.damoncai.wogua.app.ws.WebSocketServer;
 import top.damoncai.wogua.common.code.TopicEnum;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import static cn.hutool.poi.excel.sax.AttributeName.t;
 
 /**
  * <p>
@@ -50,8 +63,8 @@ public class MessageCallback implements MqttCallback {
                 message.getQos(),
                 new String(message.getPayload()));
         switch (topic){
-            case "temp":
-                tempHandle(message);
+            case "stm32":
+                stm32Handle(message);
         }
     }
 
@@ -59,15 +72,28 @@ public class MessageCallback implements MqttCallback {
      * 温度处理
      * @param message
      */
-    private void tempHandle(MqttMessage message) {
+    private void stm32Handle(MqttMessage message) throws IOException {
         byte[] payload = message.getPayload();
-        float t = ((payload[0] << 8) |  payload[1]) / 16.0f;
-        System.out.println(t);
-        Temp temp = new Temp();
-        temp.setSource("test");
-        temp.setTemp(String.valueOf(t));
-        tempService.save(temp);
+        String msgStr = new String(payload);
+        JSONObject jo = JSONObject.parseObject(msgStr);
+        if((int)jo.get("type") == 1) {
+            BigDecimal bd = new BigDecimal(String.valueOf(jo.get("temp")));
+            float t = bd.floatValue();
+            System.out.println("temp:" + t);
+            Temp temp = new Temp();
+            temp.setCreatetime(LocalDateTime.now());
+            temp.setSource("stm32");
+            temp.setTemp(String.valueOf(t));
+            tempService.save(temp);
+            Map map = new HashMap(2);
+            map.put("first",false);
+            map.put("data",temp);
+            WebSocketServer.sendInfo(JSON.toJSONStringWithDateFormat(map, "yyyy-MM-dd HH:mm:ss", SerializerFeature.WriteDateUseDateFormat),null);
+        }
+
+
     }
+
 
     /**
      * 消息发布完成且收到ack确认后的回调
@@ -84,12 +110,14 @@ public class MessageCallback implements MqttCallback {
     }
 
     public static void main(String[] args) {
-        byte b1 = 0x67;
-        byte b2 = 0x01;
-        int a = (0x01 << 8) | 0x67;
-        System.out.println(a);
-        double f = a/16.0;
-        System.out.println(f);
+        Temp temp = new Temp();
+        temp.setCreatetime(LocalDateTime.now());
+        temp.setSource("stm32");
+        temp.setTemp(String.valueOf(t));
+        Map map = new HashMap(2);
+        map.put("first",false);
+        map.put("data",temp);
+        System.out.println(JSON.toJSONStringWithDateFormat(map, "yyyy-MM-dd HH:mm:ss", SerializerFeature.WriteDateUseDateFormat));
     }
 
 }
