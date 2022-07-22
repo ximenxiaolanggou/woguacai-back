@@ -95,11 +95,9 @@ public class IotController {
     @PutMapping("openOrCloseLed/{id}")
     public Result openOrCloseLed(boolean openOrClose){
         if(openOrClose) { // 开灯
-            emqClient.publish("test","23", QosEnum.QoS0,false);
-            emqClient.publish("test","24", QosEnum.QoS0,false);
+            emqClient.publish("test","2", QosEnum.QoS0,false);
         }else{ // 关灯
-            emqClient.publish("test","13", QosEnum.QoS0,false);
-            emqClient.publish("test","14", QosEnum.QoS0,false);
+            emqClient.publish("test","1", QosEnum.QoS0,false);
         }
         return Result.ok();
     }
