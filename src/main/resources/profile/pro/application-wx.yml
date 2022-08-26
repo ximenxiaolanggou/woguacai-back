@@ -3,4 +3,4 @@ wx:
     client-id: wx59cfe0c2243b43c6
     client-secret: 9bb6206f434ec3be82cb4d1c7ea8fb23
     callback-url: http://wogua.helloword.center/api/wx/auth/callback
-    success-redirect-url: http://wogua.helloword.center/login
+    success-redirect-url: http://wogua.helloworld.center/login
