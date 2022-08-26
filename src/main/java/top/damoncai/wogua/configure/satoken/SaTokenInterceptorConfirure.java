@@ -15,6 +15,7 @@ public class SaTokenInterceptorConfirure implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns(
                         "/ws/**",
+                        "/wx/**",
                         "/auth/login",
                         "/blogArticle/findById/**",
                         "/blogArticle/page/**",

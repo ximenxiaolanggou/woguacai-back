@@ -33,12 +33,18 @@
         <dynamsoft.version>8.8.0</dynamsoft.version>
         <easyexcel.version>2.2.10</easyexcel.version>
         <shiro.ehcache.version>1.2.6</shiro.ehcache.version>
+        <JustAuth.version>1.16.5</JustAuth.version>
         <scala-bcrypt_2.10.version>2.3</scala-bcrypt_2.10.version>
         <dynamic-datasource.version>2.5.7</dynamic-datasource.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${JustAuth.version}</version>
+            </dependency>
             <!-- MQTT -->
             <dependency>
                 <groupId>org.eclipse.paho</groupId>
@@ -104,6 +110,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>me.zhyd.oauth</groupId>
+            <artifactId>JustAuth</artifactId>
+        </dependency>
 
         <!-- Bcrypt算法依赖 -->
         <dependency>

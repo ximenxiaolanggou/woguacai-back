@@ -4,7 +4,7 @@ server:
     context-path: /api
 spring:
   profiles:
-    include: blog, mqtt
+    include: blog, mqtt, wx
   servlet:
     multipart:
       enabled: true

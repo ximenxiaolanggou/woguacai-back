@@ -50,4 +50,11 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     SysUser findByMailIngoreUserId(String mail, Integer userId);
+
+    /**
+     * 根据微信open id查询
+     * @param openid
+     * @return
+     */
+    SysUser findByWxOpenId(String openid);
 }

@@ -52,6 +52,11 @@ public class SysUser extends Model<SysUser> {
     private Integer gender = 1;
 
     /**
+     * 微信open id
+     */
+    private String wxOpenId;
+
+    /**
      * 创建时间
      */
     private LocalDateTime createtime;

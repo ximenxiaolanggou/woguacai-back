@@ -34,6 +34,16 @@ public class SysUserImpl extends ServiceImpl<SysUserMapper, SysUser> implements 
     }
 
     /**
+     * 根据微信open id查询
+     * @param openid
+     * @return
+     */
+    @Override
+    public SysUser findByWxOpenId(String openid) {
+        return userMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getWxOpenId, openid));
+    }
+
+    /**
      * 根据手邮箱查询用户 并忽略 用户
      * @param mail
      * @param userId
