@@ -43,6 +43,11 @@ public class WxAuth {
     @Autowired
     private SysUserService userService;
 
+    /**
+     * 重定向到二维码
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping("/render")
     public void renderAuth(HttpServletResponse response) throws IOException {
         AuthRequest authRequest = getAuthRequest();
@@ -83,7 +88,7 @@ public class WxAuth {
 
 
     /**
-     * 登录
+     * 绑定登录
      * @param loginVo
      * @return
      */
